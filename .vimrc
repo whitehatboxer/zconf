@@ -8,8 +8,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'maksimr/vim-jsbeautify' " js format
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
-Plug 'Valloric/YouCompleteMe'
-Plug 'scrooloose/syntastic'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'vim-syntastic/syntastic'
 Plug 'davidhalter/jedi-vim' " python 定义跳转
 Plug 'vim-airline/vim-airline'
 Plug 'rakr/vim-one'  " 状态栏 
@@ -18,6 +18,16 @@ Plug 'Wildog/airline-weather.vim' " 天气
 Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go' " golang
 call plug#end()            " required
+
+" vim syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " vim go
 let g:go_highlight_types = 1
