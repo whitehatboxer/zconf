@@ -1,28 +1,23 @@
 set nocompatible              " required
 
-" Vundle 插件
-filetype off                  " required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" vim-plug 插件
+call plug#begin()
 " use PluginInstall to install
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'maksimr/vim-jsbeautify' " js format
-" Plugin 'Lokaltog/vim-powerline'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
-Plugin 'davidhalter/jedi-vim' " python 定义跳转
-Plugin 'vim-airline/vim-airline'
-Plugin 'rakr/vim-one'  " 状态栏 
-Plugin 'mattn/webapi-vim'  " 天气
-Plugin 'Wildog/airline-weather.vim' " 天气
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'fatih/vim-go' " golang
-call vundle#end()            " required
-filetype plugin indent on    " required
-
+Plug 'gmarik/Vundle.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'maksimr/vim-jsbeautify' " js format
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'Valloric/YouCompleteMe'
+Plug 'scrooloose/syntastic'
+Plug 'davidhalter/jedi-vim' " python 定义跳转
+Plug 'vim-airline/vim-airline'
+Plug 'rakr/vim-one'  " 状态栏 
+Plug 'mattn/webapi-vim'  " 天气
+Plug 'Wildog/airline-weather.vim' " 天气
+Plug 'vim-airline/vim-airline-themes'
+Plug 'fatih/vim-go' " golang
+call plug#end()            " required
 
 " vim go
 let g:go_highlight_types = 1
@@ -115,11 +110,22 @@ let g:airline_theme='molokai'
 " set background=dark
 colorscheme solarized
 
-
+if &term =~ '^screen'
+    sil! exe "set <xUp>=\e[1;*A"
+    sil! exe "set <xDown>=\e[1;*B"
+    sil! exe "set <xRight>=\e[1;*C"
+    sil! exe "set <xLeft>=\e[1;*D"
+endif
 
 " ========= vim 自身配置 ==========
 set nu
 set colorcolumn=121
+
+
+" 标签页切换
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+
 
 " 代码折叠设置
 set foldmethod=manual
@@ -157,6 +163,9 @@ set encoding=utf-8
 " 光标停留在上次退出的位置
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
+" 将ESC键映射为两次j键                                      
+inoremap jj <Esc>
+
 " split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -181,35 +190,36 @@ hi link cFunt Function
 
 set mouse=a
 
-" YouCompleteMe
-" Python Semantic Completion
-let g:ycm_python_binary_path = '/usr/bin/python3'
-" C family Completion Path
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-" 跳转快捷键
-nnoremap <c-k> :YcmCompleter GoToDeclaration<CR>|
-nnoremap <c-h> :YcmCompleter GoToDefinition<CR>|
-nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
-" 停止提示是否载入本地ycm_extra_conf文件
-let g:ycm_confirm_extra_conf = 0
-" 语法关键字补全
-let g:ycm_seed_identifiers_with_syntax = 1
-" 开启 YCM 基于标签引擎
-let g:ycm_collect_identifiers_from_tags_files = 1
-" 从第2个键入字符就开始罗列匹配项
-let g:ycm_min_num_of_chars_for_completion=2
-" 在注释输入中也能补全
-let g:ycm_complete_in_comments = 1
-" 在字符串输入中也能补全
-let g:ycm_complete_in_strings = 1
-" 注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-" 弹出列表时选择第1项的快捷键(默认为<TAB>和<Down>)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-" 弹出列表时选择前1项的快捷键(默认为<S-TAB>和<UP>)
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-" 主动补全, 默认为<C-Space>
-"let g:ycm_key_invoke_completion = ['<C-Space>']
-" 停止显示补全列表(防止列表影响视野), 可以按<C-Space>重新弹出
-"let g:ycm_key_list_stop_completion = ['<C-y>']
+
+"" YouCompleteMe
+"" Python Semantic Completion
+"let g:ycm_python_binary_path = '/usr/bin/python3'
+"" C family Completion Path
+"let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+"" 跳转快捷键
+"nnoremap <c-k> :YcmCompleter GoToDeclaration<CR>|
+"nnoremap <c-h> :YcmCompleter GoToDefinition<CR>|
+"nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
+"" 停止提示是否载入本地ycm_extra_conf文件
+"let g:ycm_confirm_extra_conf = 0
+"" 语法关键字补全
+"let g:ycm_seed_identifiers_with_syntax = 1
+"" 开启 YCM 基于标签引擎
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"" 从第2个键入字符就开始罗列匹配项
+"let g:ycm_min_num_of_chars_for_completion=2
+"" 在注释输入中也能补全
+"let g:ycm_complete_in_comments = 1
+"" 在字符串输入中也能补全
+"let g:ycm_complete_in_strings = 1
+"" 注释和字符串中的文字也会被收入补全
+"let g:ycm_collect_identifiers_from_comments_and_strings = 1
+"" 弹出列表时选择第1项的快捷键(默认为<TAB>和<Down>)
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"" 弹出列表时选择前1项的快捷键(默认为<S-TAB>和<UP>)
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"" 主动补全, 默认为<C-Space>
+""let g:ycm_key_invoke_completion = ['<C-Space>']
+"" 停止显示补全列表(防止列表影响视野), 可以按<C-Space>重新弹出
+""let g:ycm_key_list_stop_completion = ['<C-y>']
 
