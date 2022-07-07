@@ -13,8 +13,8 @@ Plug 'vim-syntastic/syntastic'
 Plug 'davidhalter/jedi-vim' " python 定义跳转
 Plug 'vim-airline/vim-airline'
 Plug 'rakr/vim-one'  " 状态栏 
-Plug 'mattn/webapi-vim'  " 天气
-Plug 'Wildog/airline-weather.vim' " 天气
+" Plug 'mattn/webapi-vim'  " 天气
+" Plug 'Wildog/airline-weather.vim' " 天气
 Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go' " golang
 call plug#end()            " required
@@ -23,6 +23,10 @@ call plug#end()            " required
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+noremap <C-E> :SyntasticCheck<CR>
+noremap <C-W> :SyntasticReset<CR>
+
+
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
