@@ -204,6 +204,8 @@ hi link cFunt Function
 
 set mouse=a
 
+" vim 搜索选中文本
+vnoremap // y/<c-r>"<cr>
 
 "" YouCompleteMe
 "" Python Semantic Completion
