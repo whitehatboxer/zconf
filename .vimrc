@@ -6,6 +6,7 @@ call plug#begin()
 Plug 'gmarik/Vundle.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'maksimr/vim-jsbeautify' " js format
+Plug 'tpope/vim-fugitive' " 为了 git blame
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 " Plug 'Valloric/YouCompleteMe'
